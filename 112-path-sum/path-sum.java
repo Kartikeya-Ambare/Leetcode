@@ -29,12 +29,10 @@ class Solution {
         
         sum += root.val;
         
-        // Check if it's a leaf node
         if(root.left == null && root.right == null){
             return sum == targetSum;
         }
         
-        // Recursively check left and right subtrees
         return get_val(root.left, targetSum, sum) || get_val(root.right, targetSum, sum);
     }
 }
