@@ -12,17 +12,11 @@ class Solution {
             if(nums[1] == 0 && nums[0] == 0){
                 return;
             }
-            // if(nums[1] == 0){
-            //     swap(nums,0,1);
-            //     return;
-            // }
         }
         int j = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 0) {
-                int temp = nums[j];
-                nums[j] = nums[i];
-                nums[i] = temp;
+        for(int i =0;i<nums.length;i++){
+            if(nums[i]!=0){
+                swap(nums,j,i);
                 j++;
             }
         }
