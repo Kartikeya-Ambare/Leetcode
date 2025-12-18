@@ -1,34 +1,39 @@
 class Solution {
+    public int lb(int[] arr, int x) {
+        int lb = -1;
+        int low = 0, high = arr.length - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (arr[mid] >= x) {
+                lb = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return (lb != -1 && arr[lb] == x) ? lb : -1;
+    }
+    
+    public int ub(int[] arr, int x) {
+        int ub = -1;
+        int low = 0, high = arr.length - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (arr[mid] > x) {
+                ub = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ub == -1 ? arr.length - 1 : ub - 1;
+    }
+
     public int[] searchRange(int[] nums, int target) {
-        if(nums.length<2){
-            if(nums.length==0 || nums[0]!=target) return new int[]{-1,-1};
-            return new int[]{0,0};
+        int left = lb(nums, target);
+        if (left == -1) {
+            return new int[]{-1, -1};
         }
-        int res [] = new int[]{-1,-1};
-        int left = 0;
-        int right = nums.length-1;
-        
-        // Find any occurrence first
-        while(left<=right){
-            int mid = left + (right - left) / 2;
-            if(nums[mid]<target){
-                left=mid+1;
-            }
-            else if(nums[mid]>target){
-                right=mid-1;
-            }
-            else{
-                // Found target, now expand left and right
-                int l = mid, r = mid;
-                // Expand left
-                while(l > 0 && nums[l-1] == target) l--;
-                // Expand right  
-                while(r < nums.length-1 && nums[r+1] == target) r++;
-                res[0] = l;
-                res[1] = r;
-                return res;
-            }
-        }
-        return res;
+        return new int[]{left, ub(nums, target)};
     }
 }
