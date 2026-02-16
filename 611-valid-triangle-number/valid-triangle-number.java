@@ -1,21 +1,19 @@
 class Solution {
-    public int triangleNumber(int[] sides) {
-        Arrays.sort(sides);
-        int totalTriangles = 0;
+    public int triangleNumber(int[] nums) {
+        Arrays.sort(nums);
+        int count=0;
+        for(int i=0; i<nums.length; i++){
+            for(int j=i+1; j<nums.length; j++){
+                int temp=nums[i]+nums[j];
+                int k=j+1;
+                while(k < nums.length && temp > nums[k]){
+                    k++;
 
-        for (int longest = sides.length - 1; longest >= 2; longest--) {
-            int left = 0;
-            int right = longest - 1;
-
-            while (left < right) {
-                if (sides[left] + sides[right] > sides[longest]) {
-                    totalTriangles += (right - left);
-                    right--;
-                } else {
-                    left++;
                 }
+                count+=k-j-1;
             }
+            
         }
-        return totalTriangles;
+        return count;
     }
 }
