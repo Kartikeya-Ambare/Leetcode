@@ -3,33 +3,37 @@ class Solution {
         if(k == num.length()){
             return "0";
         }
-        int len = num.length();
-        if(k==len)        
-            return "0";
-            
-        Stack<Character> stack = new Stack<>();
-        int i =0;
-        while(i<num.length()){
-            while(k>0 && !stack.isEmpty() && stack.peek()>num.charAt(i)){
-                stack.pop();
+        Stack<Integer> st = new Stack<>();
+
+        st.push(0);
+
+        for(int i=1;i<num.length();i++){
+            while(!st.isEmpty() && k>0 && num.charAt(st.peek())>num.charAt(i)){
+                st.pop();
                 k--;
             }
-            stack.push(num.charAt(i));
+            st.push(i);
+        }
+
+        while (k > 0 && !st.isEmpty()) {
+            st.pop();
+            k--;
+        }
+
+
+        StringBuilder sb = new StringBuilder();
+
+        while(!st.isEmpty()){
+            sb.insert(0,num.charAt(st.peek()));
+            st.pop();
+        }
+
+        int i = 0;
+        while (i < sb.length() && sb.charAt(i) == '0') {
             i++;
         }
-        
-        while(k>0){
-            stack.pop();
-            k--;            
-        }
-        
-        StringBuilder sb = new StringBuilder();
-        while(!stack.isEmpty())
-            sb.append(stack.pop());
-        sb.reverse();
-        
-        while(sb.length()>1 && sb.charAt(0)=='0')
-            sb.deleteCharAt(0);
-        return sb.toString();
+        sb.delete(0, i);
+
+        return sb.length()==0 ? "0" : sb.toString();
     }
 }
