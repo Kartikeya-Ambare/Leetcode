@@ -32,19 +32,16 @@ class MyHashSet {
     }
   
     public void add(int key) {
-        // Avoid duplicates on add
         if (!contains(key)) {
             arr.add(key);
         }
     }
   
     public void remove(int key) {
-        // Continue searching after removal due to shifting indices
         int i = 0;
         while (i < arr.size()) {
             if (arr.get(i) == key) {
                 arr.remove(i);
-                // Don't increment i - check same index again
             } else {
                 i++;
             }
