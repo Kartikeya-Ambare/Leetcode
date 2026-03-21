@@ -14,7 +14,7 @@ class Solution {
             leftMax = Math.max(leftMax, height[start]);
             rightMax = Math.max(rightMax, height[end]);
 
-            if (leftMax <= rightMax) {
+            if (leftMax < rightMax) {
 
                 totalWater += leftMax - height[start];
                 start++;
