@@ -1,15 +1,32 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        int sol[]=new int[2];
-        for(int i =0;i<nums.length;i++){
-            for(int j =i+1;j<nums.length;j++){
-                if(nums[i]+nums[j] == target){
-                    sol[0]=i;
-                    sol[1]=j;
-                    return sol;
-                }
+        // int left = 0;
+        // int right = nums.length-1;
+        // int sum = 0;
+
+        // while(left<right){
+        //     sum = nums[left]+nums[right];
+        //     if(sum == target){
+        //         return new int[]{left,right};
+        //     }
+        //     if(sum>target) right--;
+        //     else left++;
+        // }
+        // return new int[]{-1,-1}
+
+        
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
             }
+            
+            map.put(nums[i], i);
         }
-        return new int[] {0,0};
+        
+        return new int[]{-1, -1};
+
     }
 }
