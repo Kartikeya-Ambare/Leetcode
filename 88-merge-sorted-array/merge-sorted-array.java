@@ -23,7 +23,5 @@ class Solution {
             }
             k--;
         }
-        for(int x:nums1){
-        System.out.print(x+" ");
-    }}
+        }
 }
