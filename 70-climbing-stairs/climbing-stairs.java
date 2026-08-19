@@ -1,26 +1,15 @@
 class Solution {
     public int climbStairs(int n) {
-        // ArrayList<Integer> lis = new ArrayList<>();
-        // lis.add(1);
-        // lis.add(2);
-        // for(int i = 2 ;i<=n;i++){
-        //     lis.add(lis.get(i-1)+lis.get(i-2));
-        // }
-        // return lis.get(n-1);
-        int dp[] = new int[n+1];
-        Arrays.fill(dp,-1);
-        return calc(dp,n);
+       Integer memo[] = new Integer[n];
+
+       return solver(n,n-1,memo); 
     }
 
-    public int calc(int dp[], int n){
-        if(n<=2){
-            return n;
-        }
+    public static int solver(int n, int idx, Integer memo[]){
+        if(idx<2) return memo[idx] = idx+1;
 
-        if(dp[n]!=-1){
-            return dp[n];
-        }
-        dp[n] = calc(dp,n-1)+calc(dp,n-2);
-        return dp[n];
+        if(memo[idx]!=null) return memo[idx];
+
+        return memo[idx] = solver(n,idx-1,memo) +solver(n,idx-2,memo);
     }
 }
